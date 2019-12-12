@@ -1,8 +1,10 @@
 import os
 
 from flask import Flask, jsonify, request
+
 from in_database import db
 import doctors
+import appointments
 
 
 # Program & structure influenced heavily by the Flask tutorial
@@ -33,5 +35,6 @@ def create_app(test_config=None):
     # register the database commands
     db.init_app(app)
     app.register_blueprint(doctors.bp)
+    app.register_blueprint(appointments.bp)
 
     return app

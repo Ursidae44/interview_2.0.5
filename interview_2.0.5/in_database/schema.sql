@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS locations;
 DROP TABLE IF EXISTS doctor_locations;
 DROP TABLE IF EXISTS schedules;
 DROP TABLE IF EXISTS doctor_schedules;
+DROP TABLE IF EXISTS appointments;
 
 CREATE TABLE doctors (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,6 +40,15 @@ CREATE TABLE doctor_schedules (
   schedule_id INTEGER NOT NULL,
   FOREIGN KEY (doctor_id) REFERENCES doctors (id),
   FOREIGN KEY (schedule_id) REFERENCES schedules (id)
+);
+
+CREATE TABLE appointments (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  doctor_id INTEGER NOT NULL,
+  location_id INTEGER NOT NULL,
+  appointment_time timestamp NOT NULL,
+  FOREIGN KEY (doctor_id) REFERENCES doctors (id),
+  FOREIGN KEY (location_id) REFERENCES locations (id)
 );
 
 
@@ -76,3 +86,5 @@ INSERT INTO doctor_schedules(id, doctor_id, schedule_id) VALUES(7, 1, 7);
 INSERT INTO doctor_schedules(id, doctor_id, schedule_id) VALUES(8, 1, 8);
 INSERT INTO doctor_schedules(id, doctor_id, schedule_id) VALUES(9, 1, 9);
 
+INSERT INTO appointments(id, doctor_id, location_id, appointment_time)
+  VALUES (0, 0, 0, '2019-12-11 09:00:00');
